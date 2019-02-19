@@ -1,0 +1,6 @@
+%option main
+
+%%
+TODO(.*\n){1,4}		{ ECHO;}
+.|\n				{}
+%%

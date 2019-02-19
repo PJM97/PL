@@ -1,0 +1,11 @@
+%{
+
+%}
+
+%option main
+
+%%
+
+[0-9]+\ pés		{printf("%.2f",atoi(yytext)/3.0);}
+
+%%

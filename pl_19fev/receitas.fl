@@ -1,0 +1,14 @@
+%{
+
+%}
+
+%option main
+
+%%
+	int i=0;
+
+\+[0-9]+		{	printf("%s",yytext);i+=atoi(yytext);	}
+\-[0-9]+		{	printf("%s",yytext);i-=atoi(yytext);	}
+Total:.*		{	printf("Total: %d\n",i);				}
+
+%%
