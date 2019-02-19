@@ -675,8 +675,7 @@ YY_DECL
 #line 9 "receitas.fl"
 	int i=0;
 
-
-#line 680 "lex.yy.c"
+#line 679 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -735,25 +734,25 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 12 "receitas.fl"
+#line 11 "receitas.fl"
 {	printf("%s",yytext);i+=atoi(yytext);	}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 13 "receitas.fl"
+#line 12 "receitas.fl"
 {	printf("%s",yytext);i-=atoi(yytext);	}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 14 "receitas.fl"
-{	printf("Total: %d\n",i);	}
+#line 13 "receitas.fl"
+{	printf("Total: %d\n",i);				}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 16 "receitas.fl"
+#line 15 "receitas.fl"
 ECHO;
 	YY_BREAK
-#line 757 "lex.yy.c"
+#line 756 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1768,5 +1767,5 @@ int main ()
 	return 0;
 }
 
-#line 16 "receitas.fl"
+#line 15 "receitas.fl"
 
