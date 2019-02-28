@@ -1,0 +1,18 @@
+
+%option yylineno
+%option main
+
+%x STR
+%%
+
+TEMPLATE	{printf("void");}
+'''			{printf("(){\n"); BEGIN STR;}
+
+<STR>'''	{printf("}\n"); BEGIN INITIAL;}
+<STR>.+		{printf("	PRINTF(\"%%s\\n\",\"%s\");\n",yytext);}
+<STR>\n		{}
+
+.|\n		{ECHO;}
+
+
+%%

@@ -1,0 +1,24 @@
+%{
+#define limpa BUF[0]='\0'	
+%}
+
+%option yylineno
+%option main
+
+%x STR
+%%
+	char BUF[200];
+
+TEMPLATE	{printf("void");}
+'''			{printf("(){\n"); limpa; BEGIN STR;}
+
+<STR>'''\n	{ printf("}\n"); BEGIN INITIAL; }
+<STR>["\\$] { strcat(BUF,"\\"); strcat(BUF,yytext); }
+<STR>% 		{ strcat(BUF,"%%"); }
+<STR>.		{ strcat(BUF,yytext); }
+<STR>\n		{ printf("	printf(\"%s\\n\");\n",BUF); limpa; }
+
+.|\n		{ECHO;}
+
+
+%%
