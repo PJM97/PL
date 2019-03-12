@@ -1,0 +1,46 @@
+%option noyywrap
+
+%{
+	FILE * out, *abc;
+%}
+
+%x ABC META POEMA
+%%
+
+<*>title:.*		{BEGIN META; fprintf(out,"<h1>%s</h1>\n",yytext+6); }
+<*>\<abc\>  	{BEGIN ABC;}
+<ABC>\<\/abc\>  {BEGIN POEMA;}
+<ABC>.|\n 		{ fprintf(abc, "%s",yytext); }
+<META>{
+ ([^:\n]+)/: 	{ fprintf(out,"</br><b>%s</b>",yytext); }
+}
+<ABC>{
+ .|\n 			{ fprintf(abc,"%s",yytext); }
+}
+
+<POEMA>{
+ \n 			{ fprintf(out,"</br"); }
+}
+
+<*>.|\n 		{ fprintf(out,yytext); }
+
+%%
+
+int main(int argc, char* argv[]){
+	char filename[200];
+	FILE* ind = fopen("index.html","w");
+	abc = fopen("cancioneiro.abc","w");
+	if(argc>1){
+		for(int i=1; i<argc; i++){
+			sprintf(filename,"%s.html",argv[i]);
+			fprintf(ind,"<li><a href='%s'>%s<\a></li>\n",filename,filename);
+			yyin = fopen (argv[i],"r");
+			out = fopen (filename,"w");
+			yylex();
+			fclose(out);fclose(yyin);fclose(abc);
+			// system
+		}
+	}
+	else{ return 1; }
+	return 0;
+}
