@@ -6,14 +6,6 @@
 %x ABC  META POEMA
 %%
 
-void htmlInit(FILE *f){
-  fprintf(f,"<html><head><meta charset='UTF-8'/> </head><body><ul>");
-}
-
-void htmlFinit(FILE *f){
-  fprintf();
-}
-
 <*>title:.*    {BEGIN META; fprintf(out,"<h1>%s</h1>\n",yytext+6);}
 <*>\<abc\>     {BEGIN ABC; }
 <ABC>\<\/abc\> {BEGIN POEMA; }

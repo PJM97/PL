@@ -4,3 +4,4 @@ mkhtml: mkhtml.fl
 
 clean:
 	rm -f musica/*.html index.html	cancioneiro.abc _*
+	rm lex.yy.c
