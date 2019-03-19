@@ -1,0 +1,14 @@
+#!/usr/bin/gawk -f
+
+BEGIN 	{
+	FS="::"
+	print"<html><head><meta charset='UTF-8'/></head>"
+}
+
+	{printf("<li><a href='%s'>%s</a></li>\n", $(NF-2),$3) }
+	{printf("<li><a href='%s'>%s</a></li>\n", $(NF-2),$3) > $1 ".html" }
+END	{print "</body></html>"}
+
+
+	
+	
