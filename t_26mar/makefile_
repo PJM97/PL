@@ -1,0 +1,12 @@
+gramatica: gramatica.txt
+	yacc gramatica.txt
+	cc -o gramatica y.tab.c -ly
+
+clean:
+	rm y.tab.c
+
+
+gr2: gr2.fl gr2.y
+	 flex gr2.fl
+	 yacc gr2.y
+	 cc 
