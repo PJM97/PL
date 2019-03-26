@@ -1,0 +1,5 @@
+#!/usr/bin/gawk -f
+
+BEGIN	{FS="::"}
+
+NF==7 	{print ("<li><a href=",$5,">",$3,"</a></li>") }

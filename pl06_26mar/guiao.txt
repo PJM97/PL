@@ -1,0 +1,16 @@
+
+
+estrutura do ficheiro arq-son.txt:
+
+1ºCampo: provincia
+2ºCampo: local
+3ºCampo: titulo
+4ºCampo: musicos
+5ºCampo: nota
+6ºCampo: file
+7ºCampo: duracao
+
+objetivo:
+	fazer um ficheiro html para cada provincia
+	por links com o titulo do ficheiro
+	

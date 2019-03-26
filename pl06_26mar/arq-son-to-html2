@@ -1,0 +1,29 @@
+#!/usr/bin/gawk -f
+
+BEGIN	{FS="::"}
+
+
+# quando entra na provincia, aparece como título o nome da provincia
+NF==7 && p[$1]==0 {beginHTML($1) > $1 ".html"}
+
+NF==7 	{print link($5,$3) > $1 ".html" }
+NF==7 	{p[$1]++}
+NF==7 	{split($6,t,":")
+		 duracao[$1] += t[1]*60 + t[2]}
+
+#END 	{for(k in p) print link(k ".html",k " " p[k]) > "_.html"}
+END 	{
+	print beginHTML("arquivo sonoro") > "_.html"
+	for(k in p) {
+		print link(k ".html",k " - " duracao[k] " segundos") > "_.html"
+	}
+}
+
+
+function link(u,t){
+	return "<li><a href='" u "'>" t "</a></li>"
+}
+
+function beginHTML(titulo){
+	return "<html> <head> <meta charset='UTF-8'> </head> <body> <h1>" titulo "</h1>"
+}
