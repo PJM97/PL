@@ -1,0 +1,7 @@
+digraph {
+	rankdir=LR
+	"a.b-c.html"->c;
+	c->d;
+	d->e;
+	e->e;
+}

@@ -1,0 +1,15 @@
+%option noyywrap
+
+%%
+[0-9]+(\.[0-9]+)? 	{yylval.n = atoi(yytext); return NUM;}
+pi 					{ yylval.n=M_PI; return NUM; }
+
+sen 				{ yylval.f=sin;  return R2R; }
+exp 				{ yylval.f=sin;  return R2R; }
+log 				{ yylval.f=log;  return R2R; }
+[!()+\-*/\n] 		{ return yytext[0]; }
+
+[ \t] 				{}
+
+
+%%
