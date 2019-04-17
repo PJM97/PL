@@ -1,0 +1,5 @@
+Curso: MIEI 2018
+Rui(17,18,19)
+Quim(17,13,10,18,12,13)
+Curso: LCC 2018
+Rita(11)
