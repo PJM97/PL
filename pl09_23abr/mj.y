@@ -25,11 +25,11 @@ decls	: VAR ID ':' tipo ';'
 		|
 		;
 
-insts   : insts inst
+insts   : insts inst 	{asprintf(&$$,"%s\n%s",$1,$2);}
 		| 				{$$='';}
 		;
 
-inst 	: ID '=' exp ';'
+inst 	: ID '=' exp ';' {asprintf(&$$,"%s\n%s",$1,$3);}
 		| PRINT exp ';'
 		;
 
