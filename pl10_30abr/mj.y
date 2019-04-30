@@ -4,6 +4,10 @@
 #include "lex.yy.c"
 int yyerror(char *s){fprintf(stderr,"Erro: %s\n",s);}
 int yylex();
+int tabEnd[26]; // tabela de endereços - mapea letra com posição tabEnd[0]='a'
+int endereco(char*x){ return tabEnd[x[0]-'a']; }
+int ultimo = -1; // ultimo endereço ocupado no tabEnd
+void aloca(char* var){tabEnd[var[0]-'a']=++ultimo;}
 }
 
 %token NUM VAR PRINT INT ID
@@ -14,38 +18,39 @@ int yylex();
 }
 
 %type <n> NUM
-%type <c> ID decls insts inst exp tipo
+%type <c> INT ID decls insts inst exp tipo parc
 
 %%
 
-prog 	: decls insts {printf("%s\n%s\n",$1,$2);}
-		;
+prog  : decls insts 		{printf("%s\nstart\n%s\npushs \"\\n\"\nwrites\nstop\n",$1,$2);}
+	  ;
 
-decls	: VAR ID ':' tipo ';'
-		|
-		;
+decls : decls VAR ID ':' tipo ';' {
+							 asprintf(&$$,"%s\npushi 0\n",$1);
+							 aloca($3);
 
-insts   : insts inst 	{asprintf(&$$,"%s\n%s",$1,$2);}
-		| 				{$$='';}
-		;
+}
+	  |						{$$="";}
+	  ;
 
-inst 	: ID '=' exp ';' {asprintf(&$$,"%s\n%s",$1,$3);}
-		| PRINT exp ';'
-		;
+insts : insts inst 			{asprintf(&$$,"%s\n%s",$1,$2);}
+	  | 					{$$="";}
+	  ;
 
-exp 	: NUM
-		| ID
-		| exp '+' NUM
-		;
+inst  : ID '=' exp ';'		{asprintf(&$$,"%s\nstoreg %d\n",$3,endereco($1));}
+	  | PRINT exp ';'		{asprintf(&$$,"%s\nwritei\n",$2);}
+	  ;
 
-// op		: '+'
-// 		| '-'
-// 		| '*'
-// 		| '/'
-// 		;
+exp   : exp '+' parc		{asprintf(&$$,"%s\n%s\nadd\n",$1,$3);}
+	  | parc				{$$=$1;}
+	  ;
 
-tipo 	: INT
-		;
+parc  : ID 					{asprintf(&$$,"pushg %d\n",endereco($1));}
+	  | NUM					{asprintf(&$$,"pushi %.0f\n",$1);}
+	  ;
+
+tipo  : INT 				{$$="";}
+	  ;
 
 %%
 
