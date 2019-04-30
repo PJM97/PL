@@ -114,7 +114,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 15 "mj.y" /* yacc.c:355  */
+#line 17 "mj.y" /* yacc.c:355  */
 
 	double n;
     char*  c;
@@ -142,7 +142,6 @@ int yyparse (void);
 
 #define _GNU_SOURCE
 #include <stdio.h>
-#include "lex.yy.c"
 int yyerror(char *s){fprintf(stderr,"Erro: %s\n",s);}
 int yylex();
 int tabEnd[26]; // tabela de endereços - mapea letra com posição tabEnd[0]='a'
@@ -150,7 +149,10 @@ int endereco(char*x){ return tabEnd[x[0]-'a']; }
 int ultimo = -1; // ultimo endereço ocupado no tabEnd
 void aloca(char* var){tabEnd[var[0]-'a']=++ultimo;}
 
-#line 154 "y.tab.c" /* yacc.c:359  */
+#include "lex.yy.c"
+
+
+#line 156 "y.tab.c" /* yacc.c:359  */
 
 #ifdef short
 # undef short
@@ -448,8 +450,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    25,    25,    28,    33,    36,    37,    40,    41,    44,
-      45,    48,    49,    52
+       0,    27,    27,    30,    35,    38,    39,    42,    43,    46,
+      47,    50,    51,    54
 };
 #endif
 
@@ -1229,83 +1231,83 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 25 "mj.y" /* yacc.c:1646  */
+#line 27 "mj.y" /* yacc.c:1646  */
     {printf("%s\nstart\n%s\npushs \"\\n\"\nwrites\nstop\n",(yyvsp[-1].c),(yyvsp[0].c));}
-#line 1235 "y.tab.c" /* yacc.c:1646  */
+#line 1237 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 28 "mj.y" /* yacc.c:1646  */
+#line 30 "mj.y" /* yacc.c:1646  */
     {
 							 asprintf(&(yyval.c),"%s\npushi 0\n",(yyvsp[-5].c));
 							 aloca((yyvsp[-3].c));
 
 }
-#line 1245 "y.tab.c" /* yacc.c:1646  */
+#line 1247 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 33 "mj.y" /* yacc.c:1646  */
+#line 35 "mj.y" /* yacc.c:1646  */
     {(yyval.c)="";}
-#line 1251 "y.tab.c" /* yacc.c:1646  */
+#line 1253 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 36 "mj.y" /* yacc.c:1646  */
+#line 38 "mj.y" /* yacc.c:1646  */
     {asprintf(&(yyval.c),"%s\n%s",(yyvsp[-1].c),(yyvsp[0].c));}
-#line 1257 "y.tab.c" /* yacc.c:1646  */
+#line 1259 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 37 "mj.y" /* yacc.c:1646  */
+#line 39 "mj.y" /* yacc.c:1646  */
     {(yyval.c)="";}
-#line 1263 "y.tab.c" /* yacc.c:1646  */
+#line 1265 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 40 "mj.y" /* yacc.c:1646  */
+#line 42 "mj.y" /* yacc.c:1646  */
     {asprintf(&(yyval.c),"%s\nstoreg %d\n",(yyvsp[-1].c),endereco((yyvsp[-3].c)));}
-#line 1269 "y.tab.c" /* yacc.c:1646  */
+#line 1271 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 41 "mj.y" /* yacc.c:1646  */
+#line 43 "mj.y" /* yacc.c:1646  */
     {asprintf(&(yyval.c),"%s\nwritei\n",(yyvsp[-1].c));}
-#line 1275 "y.tab.c" /* yacc.c:1646  */
+#line 1277 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 44 "mj.y" /* yacc.c:1646  */
+#line 46 "mj.y" /* yacc.c:1646  */
     {asprintf(&(yyval.c),"%s\n%s\nadd\n",(yyvsp[-2].c),(yyvsp[0].c));}
-#line 1281 "y.tab.c" /* yacc.c:1646  */
+#line 1283 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 45 "mj.y" /* yacc.c:1646  */
+#line 47 "mj.y" /* yacc.c:1646  */
     {(yyval.c)=(yyvsp[0].c);}
-#line 1287 "y.tab.c" /* yacc.c:1646  */
+#line 1289 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 48 "mj.y" /* yacc.c:1646  */
+#line 50 "mj.y" /* yacc.c:1646  */
     {asprintf(&(yyval.c),"pushg %d\n",endereco((yyvsp[0].c)));}
-#line 1293 "y.tab.c" /* yacc.c:1646  */
+#line 1295 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 49 "mj.y" /* yacc.c:1646  */
+#line 51 "mj.y" /* yacc.c:1646  */
     {asprintf(&(yyval.c),"pushi %.0f\n",(yyvsp[0].n));}
-#line 1299 "y.tab.c" /* yacc.c:1646  */
+#line 1301 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 52 "mj.y" /* yacc.c:1646  */
+#line 54 "mj.y" /* yacc.c:1646  */
     {(yyval.c)="";}
-#line 1305 "y.tab.c" /* yacc.c:1646  */
+#line 1307 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1309 "y.tab.c" /* yacc.c:1646  */
+#line 1311 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1533,7 +1535,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 55 "mj.y" /* yacc.c:1906  */
+#line 57 "mj.y" /* yacc.c:1906  */
 
 
 int main(){

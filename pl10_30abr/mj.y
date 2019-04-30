@@ -1,13 +1,15 @@
 %code{
 #define _GNU_SOURCE
 #include <stdio.h>
-#include "lex.yy.c"
 int yyerror(char *s){fprintf(stderr,"Erro: %s\n",s);}
 int yylex();
 int tabEnd[26]; // tabela de endereços - mapea letra com posição tabEnd[0]='a'
 int endereco(char*x){ return tabEnd[x[0]-'a']; }
 int ultimo = -1; // ultimo endereço ocupado no tabEnd
 void aloca(char* var){tabEnd[var[0]-'a']=++ultimo;}
+
+#include "lex.yy.c"
+
 }
 
 %token NUM VAR PRINT INT ID
