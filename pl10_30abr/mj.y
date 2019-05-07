@@ -24,7 +24,7 @@ void aloca(char* var){tabEnd[var[0]-'a']=++ultimo;}
 
 %%
 
-prog  : decls insts 		{printf("%s\nstart\n%s\npushs \"\\n\"\nwrites\nstop\n",$1,$2);}
+prog  : decls insts 		{printf("%s\nstart\n%s\nstop\n",$1,$2);}
 	  ;
 
 decls : decls VAR ID ':' tipo ';' {
@@ -40,7 +40,7 @@ insts : insts inst 			{asprintf(&$$,"%s\n%s",$1,$2);}
 	  ;
 
 inst  : ID '=' exp ';'		{asprintf(&$$,"%s\nstoreg %d\n",$3,endereco($1));}
-	  | PRINT exp ';'		{asprintf(&$$,"%s\nwritei\n",$2);}
+	  | PRINT exp ';'		{asprintf(&$$,"%s\nwritei\npushs \"\\n\"\nwrites\n",$2);}
 	  ;
 
 exp   : exp '+' parc		{asprintf(&$$,"%s\n%s\nadd\n",$1,$3);}

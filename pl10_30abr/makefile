@@ -1,14 +1,14 @@
-make:
+make: mj.fl
 	flex mj.fl
 	yacc -v mj.y
 	cc -o mj y.tab.c
 
-vm:
+vm: p.vm
 	vms p.vm
 
-vmg:
-	vms -g p.vm
+vmg: p.vm
+	vms -g p.vm &
 
-run:
+run: exemplo.mj
 	./mj < exemplo.mj > soma.vm
 	vms soma.vm

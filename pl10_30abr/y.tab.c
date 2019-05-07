@@ -1232,7 +1232,7 @@ yyreduce:
     {
         case 2:
 #line 27 "mj.y" /* yacc.c:1646  */
-    {printf("%s\nstart\n%s\npushs \"\\n\"\nwrites\nstop\n",(yyvsp[-1].c),(yyvsp[0].c));}
+    {printf("%s\nstart\n%s\nstop\n",(yyvsp[-1].c),(yyvsp[0].c));}
 #line 1237 "y.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1272,7 +1272,7 @@ yyreduce:
 
   case 8:
 #line 43 "mj.y" /* yacc.c:1646  */
-    {asprintf(&(yyval.c),"%s\nwritei\n",(yyvsp[-1].c));}
+    {asprintf(&(yyval.c),"%s\nwritei\npushs \"\\n\"\nwrites\n",(yyvsp[-1].c));}
 #line 1277 "y.tab.c" /* yacc.c:1646  */
     break;
 

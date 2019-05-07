@@ -20,7 +20,7 @@ pushg 1
 add
 
 writei
-
 pushs "\n"
 writes
+
 stop
