@@ -12,6 +12,9 @@ int 				{return INT;}
 var 				{return VAR;}
 print 				{return PRINT;}
 read 				{return READ;}
+if 					{return IF;}
+else 				{return ELSE;}
+while 				{return WHILE;}
 \"[^\"\n]*\" 		{ yylval.c = strdup(yytext); return STRING;}
 
 [a-zA-Z]+ 			{ yylval.c = strdup(yytext); return ID;}

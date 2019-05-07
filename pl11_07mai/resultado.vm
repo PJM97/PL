@@ -44,4 +44,18 @@ writei
 pushs "\n"
 writes
 
+pushg 0
+jz else
+pushi 999
+writei
+pushs "\n"
+writes
+
+jump fimse
+else:
+pushg 0
+writei
+pushs "\n"
+writes
+fimse:
 stop

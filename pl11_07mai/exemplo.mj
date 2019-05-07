@@ -6,3 +6,5 @@ print (x+y);
 read "Escreva um inteiro X: ",x;
 print (x+y)*x;
 print x;
+if(x) print 999; else print x;
+

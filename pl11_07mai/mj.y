@@ -12,7 +12,7 @@ void aloca(char* var){tabEnd[var[0]-'a']=++ultimo;}
 
 }
 
-%token NUM VAR PRINT INT ID READ STRING
+%token NUM VAR PRINT INT ID READ STRING IF ELSE WHILE 
 
 %union{
 	double n;
@@ -20,7 +20,7 @@ void aloca(char* var){tabEnd[var[0]-'a']=++ultimo;}
 }
 
 %type <n> NUM
-%type <c> INT ID decls insts inst exp tipo parc fact STRING
+%type <c> INT ID decls insts inst exp tipo parc fact STRING ifinst cond whileinst
 
 %%
 
@@ -43,7 +43,18 @@ inst  : ID '=' exp ';'		{asprintf(&$$,"%sstoreg %d\n",$3,endereco($1));}
 	  | PRINT  exp ';'		{asprintf(&$$,"%swritei\npushs \"\\n\"\nwrites\n",$2);}
 	  | READ STRING ',' ID ';' {asprintf(&$$,"pushs %s\nwrites\nread\natoi\nstoreg %d\n",$2,endereco($4));}  
 	  | READ ID ';' 		{asprintf(&$$,"read\natoi\nstoreg %d\n",endereco($2));}
+	  | ifinst 				{$$=$1;}
+	  | whileinst 			{$$=$1;}
+	  | '{' insts '}' 		{$$=$2;}
 	  ;
+
+whileinst : WHILE '(' cond ')' inst {asprintf(&$$,"while:\n%sjz fimwhile\n%sjump while\nfimwhile:\n",$3,$5);}
+
+cond : exp {$$=$1;}
+     ;
+
+ifinst : IF '(' cond ')' inst {asprintf(&$$,"%sjz fimse\n%s\nfimse:\n",$3,$5);}
+	   | IF '(' cond ')' inst ELSE inst {asprintf(&$$,"%sjz else\n%s\njump fimse\nelse:\n%sfimse:",$3,$5,$7);}
 
 exp   : exp '+' parc		{asprintf(&$$,"%s\n%s\nadd\n",$1,$3);}
 	  | exp '-' parc 		{asprintf(&$$,"%s\n%s\nsub\n",$1,$3);}
