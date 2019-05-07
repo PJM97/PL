@@ -1,0 +1,47 @@
+
+pushi 0
+
+pushi 0
+
+start
+
+pushi 3
+storeg 0
+
+pushi 7
+storeg 1
+
+pushg 0
+
+pushg 1
+
+add
+writei
+pushs "\n"
+writes
+
+pushs "Escreva um inteiro X: "
+writes
+read
+atoi
+storeg 0
+
+pushg 0
+
+pushg 1
+
+add
+
+pushg 0
+
+mul
+writei
+pushs "\n"
+writes
+
+pushg 0
+writei
+pushs "\n"
+writes
+
+stop

@@ -1,0 +1,8 @@
+var x:int;
+var y:int;
+x=3;
+y=7;
+print (x+y);
+read "Escreva um inteiro X: ",x;
+print (x+y)*x;
+print x;

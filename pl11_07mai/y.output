@@ -1,0 +1,444 @@
+Grammar
+
+    0 $accept: prog $end
+
+    1 prog: decls insts
+
+    2 decls: decls VAR ID ':' tipo ';'
+    3      | %empty
+
+    4 insts: insts inst
+    5      | %empty
+
+    6 inst: ID '=' exp ';'
+    7     | PRINT exp ';'
+    8     | READ STRING ',' ID ';'
+    9     | READ ID ';'
+
+   10 exp: exp '+' parc
+   11    | exp '-' parc
+   12    | parc
+
+   13 parc: parc '*' fact
+   14     | parc '/' fact
+   15     | fact
+
+   16 fact: ID
+   17     | NUM
+   18     | '(' exp ')'
+
+   19 tipo: INT
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 18
+')' (41) 18
+'*' (42) 13
+'+' (43) 10
+',' (44) 8
+'-' (45) 11
+'/' (47) 14
+':' (58) 2
+';' (59) 2 6 7 8 9
+'=' (61) 6
+error (256)
+NUM (258) 17
+VAR (259) 2
+PRINT (260) 7
+INT (261) 19
+ID (262) 2 6 8 9 16
+READ (263) 8 9
+STRING (264) 8
+
+
+Nonterminals, with rules where they appear
+
+$accept (20)
+    on left: 0
+prog (21)
+    on left: 1, on right: 0
+decls (22)
+    on left: 2 3, on right: 1 2
+insts (23)
+    on left: 4 5, on right: 1 4
+inst (24)
+    on left: 6 7 8 9, on right: 4
+exp (25)
+    on left: 10 11 12, on right: 6 7 10 11 18
+parc (26)
+    on left: 13 14 15, on right: 10 11 12 13 14
+fact (27)
+    on left: 16 17 18, on right: 13 14 15
+tipo (28)
+    on left: 19, on right: 2
+
+
+State 0
+
+    0 $accept: . prog $end
+
+    $default  reduce using rule 3 (decls)
+
+    prog   go to state 1
+    decls  go to state 2
+
+
+State 1
+
+    0 $accept: prog . $end
+
+    $end  shift, and go to state 3
+
+
+State 2
+
+    1 prog: decls . insts
+    2 decls: decls . VAR ID ':' tipo ';'
+
+    VAR  shift, and go to state 4
+
+    $default  reduce using rule 5 (insts)
+
+    insts  go to state 5
+
+
+State 3
+
+    0 $accept: prog $end .
+
+    $default  accept
+
+
+State 4
+
+    2 decls: decls VAR . ID ':' tipo ';'
+
+    ID  shift, and go to state 6
+
+
+State 5
+
+    1 prog: decls insts .
+    4 insts: insts . inst
+
+    PRINT  shift, and go to state 7
+    ID     shift, and go to state 8
+    READ   shift, and go to state 9
+
+    $default  reduce using rule 1 (prog)
+
+    inst  go to state 10
+
+
+State 6
+
+    2 decls: decls VAR ID . ':' tipo ';'
+
+    ':'  shift, and go to state 11
+
+
+State 7
+
+    7 inst: PRINT . exp ';'
+
+    NUM  shift, and go to state 12
+    ID   shift, and go to state 13
+    '('  shift, and go to state 14
+
+    exp   go to state 15
+    parc  go to state 16
+    fact  go to state 17
+
+
+State 8
+
+    6 inst: ID . '=' exp ';'
+
+    '='  shift, and go to state 18
+
+
+State 9
+
+    8 inst: READ . STRING ',' ID ';'
+    9     | READ . ID ';'
+
+    ID      shift, and go to state 19
+    STRING  shift, and go to state 20
+
+
+State 10
+
+    4 insts: insts inst .
+
+    $default  reduce using rule 4 (insts)
+
+
+State 11
+
+    2 decls: decls VAR ID ':' . tipo ';'
+
+    INT  shift, and go to state 21
+
+    tipo  go to state 22
+
+
+State 12
+
+   17 fact: NUM .
+
+    $default  reduce using rule 17 (fact)
+
+
+State 13
+
+   16 fact: ID .
+
+    $default  reduce using rule 16 (fact)
+
+
+State 14
+
+   18 fact: '(' . exp ')'
+
+    NUM  shift, and go to state 12
+    ID   shift, and go to state 13
+    '('  shift, and go to state 14
+
+    exp   go to state 23
+    parc  go to state 16
+    fact  go to state 17
+
+
+State 15
+
+    7 inst: PRINT exp . ';'
+   10 exp: exp . '+' parc
+   11    | exp . '-' parc
+
+    ';'  shift, and go to state 24
+    '+'  shift, and go to state 25
+    '-'  shift, and go to state 26
+
+
+State 16
+
+   12 exp: parc .
+   13 parc: parc . '*' fact
+   14     | parc . '/' fact
+
+    '*'  shift, and go to state 27
+    '/'  shift, and go to state 28
+
+    $default  reduce using rule 12 (exp)
+
+
+State 17
+
+   15 parc: fact .
+
+    $default  reduce using rule 15 (parc)
+
+
+State 18
+
+    6 inst: ID '=' . exp ';'
+
+    NUM  shift, and go to state 12
+    ID   shift, and go to state 13
+    '('  shift, and go to state 14
+
+    exp   go to state 29
+    parc  go to state 16
+    fact  go to state 17
+
+
+State 19
+
+    9 inst: READ ID . ';'
+
+    ';'  shift, and go to state 30
+
+
+State 20
+
+    8 inst: READ STRING . ',' ID ';'
+
+    ','  shift, and go to state 31
+
+
+State 21
+
+   19 tipo: INT .
+
+    $default  reduce using rule 19 (tipo)
+
+
+State 22
+
+    2 decls: decls VAR ID ':' tipo . ';'
+
+    ';'  shift, and go to state 32
+
+
+State 23
+
+   10 exp: exp . '+' parc
+   11    | exp . '-' parc
+   18 fact: '(' exp . ')'
+
+    '+'  shift, and go to state 25
+    '-'  shift, and go to state 26
+    ')'  shift, and go to state 33
+
+
+State 24
+
+    7 inst: PRINT exp ';' .
+
+    $default  reduce using rule 7 (inst)
+
+
+State 25
+
+   10 exp: exp '+' . parc
+
+    NUM  shift, and go to state 12
+    ID   shift, and go to state 13
+    '('  shift, and go to state 14
+
+    parc  go to state 34
+    fact  go to state 17
+
+
+State 26
+
+   11 exp: exp '-' . parc
+
+    NUM  shift, and go to state 12
+    ID   shift, and go to state 13
+    '('  shift, and go to state 14
+
+    parc  go to state 35
+    fact  go to state 17
+
+
+State 27
+
+   13 parc: parc '*' . fact
+
+    NUM  shift, and go to state 12
+    ID   shift, and go to state 13
+    '('  shift, and go to state 14
+
+    fact  go to state 36
+
+
+State 28
+
+   14 parc: parc '/' . fact
+
+    NUM  shift, and go to state 12
+    ID   shift, and go to state 13
+    '('  shift, and go to state 14
+
+    fact  go to state 37
+
+
+State 29
+
+    6 inst: ID '=' exp . ';'
+   10 exp: exp . '+' parc
+   11    | exp . '-' parc
+
+    ';'  shift, and go to state 38
+    '+'  shift, and go to state 25
+    '-'  shift, and go to state 26
+
+
+State 30
+
+    9 inst: READ ID ';' .
+
+    $default  reduce using rule 9 (inst)
+
+
+State 31
+
+    8 inst: READ STRING ',' . ID ';'
+
+    ID  shift, and go to state 39
+
+
+State 32
+
+    2 decls: decls VAR ID ':' tipo ';' .
+
+    $default  reduce using rule 2 (decls)
+
+
+State 33
+
+   18 fact: '(' exp ')' .
+
+    $default  reduce using rule 18 (fact)
+
+
+State 34
+
+   10 exp: exp '+' parc .
+   13 parc: parc . '*' fact
+   14     | parc . '/' fact
+
+    '*'  shift, and go to state 27
+    '/'  shift, and go to state 28
+
+    $default  reduce using rule 10 (exp)
+
+
+State 35
+
+   11 exp: exp '-' parc .
+   13 parc: parc . '*' fact
+   14     | parc . '/' fact
+
+    '*'  shift, and go to state 27
+    '/'  shift, and go to state 28
+
+    $default  reduce using rule 11 (exp)
+
+
+State 36
+
+   13 parc: parc '*' fact .
+
+    $default  reduce using rule 13 (parc)
+
+
+State 37
+
+   14 parc: parc '/' fact .
+
+    $default  reduce using rule 14 (parc)
+
+
+State 38
+
+    6 inst: ID '=' exp ';' .
+
+    $default  reduce using rule 6 (inst)
+
+
+State 39
+
+    8 inst: READ STRING ',' ID . ';'
+
+    ';'  shift, and go to state 40
+
+
+State 40
+
+    8 inst: READ STRING ',' ID ';' .
+
+    $default  reduce using rule 8 (inst)

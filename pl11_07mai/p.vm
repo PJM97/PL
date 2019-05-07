@@ -1,0 +1,14 @@
+pushi 0		//este é o nosso x
+pushi 0		//este é o nosso y
+start
+pushi 5
+storeg 0	// x toma o valor de 5
+pushi 7
+storeg 1	// y toma o valor de 7
+pushg 0		// pomos o x no topo da stack
+pushg 1		// pomos o y no topo da stack
+add			// x + y
+writei		// print x+y
+pushs "\n"
+writes
+stop
