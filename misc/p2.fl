@@ -1,0 +1,39 @@
+%{
+int s[100]={0};
+int sp =0;
+
+
+void erro(){
+	printf("\nERRO\n");
+}
+
+%}
+
+%option main
+%s attr
+
+%%
+
+"(books"		{printf("<books>"); s[sp++]=1;}
+")books"		{printf("</books>\n"); if(s[--sp]!=1) erro();}
+"(book"			{printf("\t<book"); s[sp++]=2; BEGIN(attr);}
+")book"			{printf("\t</book>"); if(s[--sp]!=2) erro();}
+"(title"		{printf("\t\t<title>"); s[sp++]=3;}
+")title"		{printf("</title>"); if(s[--sp]!=3) erro();}
+"(author"		{printf("\t\t<author>"); s[sp++]=4;}
+")author"		{printf("</author>"); if(s[--sp]!=4) erro();}
+"(isbn"			{printf("\t\t<isbn>"); s[sp++]=5; BEGIN(attr);}
+")isbn"			{printf("</isbn>"); if(s[--sp]!=5) erro();}
+
+\-\\n 			{printf("\n");}
+\-.+			{printf("%s",yytext+1);}
+
+[\n\t]			{}
+
+
+<attr>^A[^\ ]+ 	{printf(" %s=",yytext+1);}
+<attr>\ .+		{printf("'%s'>",yytext+1);}
+<attr>[^ A]		{BEGIN(INITIAL);}
+
+%%
+

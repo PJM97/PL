@@ -1,0 +1,23 @@
+%{
+
+// =head				{BEGIN(comment);}
+// <comment>(.|\n)		{}
+// <comment>=cut		{BEGIN(0);}
+// %x comment
+
+
+// \"([^\"]|\\\")*\"     {printf("[%s]",yytext);}
+
+
+// =head[^(=cut)]*=cut 	  {}
+%}
+
+%option main
+
+
+%%
+
+[^(CV)] 			{printf("[%s]\n",yytext);}
+
+
+%%

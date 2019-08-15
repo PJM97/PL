@@ -1,0 +1,21 @@
+(books
+-\n
+(book
+Atype papel
+-\n
+(title
+-A Arte da Fuga
+)title
+-\n
+(author
+-J. s. Bach
+)author
+-\n
+(isbn
+Aid 1
+-987-22222-234-1
+)isbn
+-\n
+)book
+-\n
+)books

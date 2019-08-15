@@ -1,0 +1,32 @@
+## prédios de Gualtar
+vidro 20x50 :: 300 :: euros
+vidro 100x80 :: 500 :: euros
+fechadura :: 1000 :: euros
+tijolo :: 20 :: euros
+telha :: 20 :: euros
+
+Porta :: 4 :: vidro 20x50
+Porta :: 1 :: fechadura
+Janela :: 2 :: vidro 100x80
+postigo :: 1 :: vidro 20x50
+
+rés do chão :: 4 :: Porta
+rés do chão :: 4 :: postigo
+rés do chão :: 4 :: tijolo
+
+andar :: 4 :: postigo
+andar :: 12 :: Janela
+andar :: 900 :: tijolo
+
+telhado :: 200 :: telha
+telhado :: 2 :: postigo
+
+predio :: 1 :: rés do chão
+predio :: 4 :: andar
+predio :: 1 :: telhado
+
+bairro :: 20 :: predio
+
+Porta
+bairro
+Janela
